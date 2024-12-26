@@ -1,0 +1,127 @@
+<html>
+    <head></head>
+    <style>
+     * {
+    margin:0;
+    padding:0;
+    outline: 0;
+    font-family: 'Courier New', Courier, monospace
+}
+body {
+    height: 100vh;
+    background-image: url(pinky.jpeg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    padding: 20px 25px;
+    width: 500px;
+    background-color: rgba(190, 188, 188, 0.61);
+    box-shadow: 0 0 10px rgba(243, 240, 240, 0.959);
+    color: aliceblue;
+}
+.container h1{
+    text-align: center;
+    color: #fafafa;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    border-bottom: 4px solid#fa5bf2;
+}
+.container input{
+    width: calc(100% - 20px);
+    padding: 8px 10px;
+    margin-bottom: 15px;
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid #fa5bf2;
+    color: #fff;
+    font-size: 20px;
+}
+.container button{
+    width: 100%;
+    padding: 5px 0;
+    border: none;
+    background-color: #fa5bf2;
+    font-size: 18px;
+    color: #fff;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.container Button:hover{
+    background-color: black;
+    border-radius: 8px;
+}
+    </style>
+        <body>
+            <!-- Konten -->
+            <div class="container">
+                <input type="text" placeholder="username" id="usernameInput"/><br>
+                <input type="password" placeholder="password" id="passwordInput"/><br>
+                <button onclick="onLogin()" id="loginButton">LOGIN</button><br>
+                <button onclick="onLogout()" id="logoutButton">LOGOUT</button><br>
+                <br/>
+                <h1 id="Narisaph">Hi! Narisa, How your Day?</h1>
+                <h1 id="basic">Try Again</h1>
+            </div>
+
+            <script type="application/javascript">
+
+                let usernameInput = document.getElementById('usernameInput');
+                let passwordInput = document.getElementById('passwordInput');
+                let loginButton = document.getElementById('loginButton');
+                let logoutButton = document.getElementById('logoutButton');
+                let admin = document.getElementById('Narisaph');
+                let basic = document.getElementById('basic');
+
+
+                admin.style.display = "none";
+                basic.style.display = "none";
+                logoutButton.style.display = "none";
+
+
+                function onLogin() {
+                localStorage.setItem("username", usernameInput.value);
+                logoutButton.style.display = "block";
+                if(usernameInput.value == "Narisaph" && passwordInput.value == "12345678") {
+                    localStorage.setItem("role", "admin");
+                    usernameInput.style.display = "none"
+                    passwordInput.style.display = "none"
+                    loginButton.style.display = "none"
+                    admin.style.display = "block";
+                    basic.style.display = "none";
+                } else {
+                    usernameInput.style.display = "none"
+                    passwordInput.style.display = "none"
+                    loginButton.style.display = "none"
+                    localStorage.setItem("role", "basic");
+                    basic.style.display = "block";
+                    admin.style.display = "none";
+                }
+            }
+
+            if(localStorage.getItem('username')){
+                usernameInput.style.display = "none"
+                passwordInput.style.display = "none"
+                loginButton.style.display = "none"
+                logoutButton.style.display = "block"
+                if(localStorage.getItem('role') == "admin"){
+                 basic.style.display = "none";
+                 admin.style.display = "block";
+                }else{
+                 admin.style.display = "none";
+                 basic.style.display = "block";  
+                }
+            }
+
+            function onLogout() {
+            localStorage.clear();
+            location.reload();
+            }
+            </script>
+        </body>
+</html>
